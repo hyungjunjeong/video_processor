@@ -1,12 +1,16 @@
 <template>
   <v-container v-show="getPlayerVisibility">
     <v-row justify="center">
-      <video-player
-        class="vjs-custom-skin"
-        ref="videoPlayer"
-        :options="playerOptions"
-        @click="hey()"
-      />
+      <v-col>
+        <video-player
+          :class="['vjs-custom-skin', monochrome ? 'monochrome' : '']"
+          ref="videoPlayer"
+          :options="playerOptions"
+        />
+      </v-col>
+      <v-col>
+        <v-switch v-model="monochrome" :label="`monochrome`"></v-switch>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -25,6 +29,8 @@ export default class VideoPlayer extends Vue {
   public $refs!: {
     videoPlayer: any;
   };
+
+  private monochrome = false;
   @(namespace("VideoModule").Getter("getFile"))
   private file!: File | null;
 
@@ -35,9 +41,9 @@ export default class VideoPlayer extends Vue {
     return this.$refs.videoPlayer.player;
   }
 
-  private hey() {
-    console.log("clicked");
-  }
+  // private playerStateChanged(event) {
+  //   console.log("clicked", event);
+  // }
 
   get playerOptions() {
     return {
@@ -68,5 +74,27 @@ export default class VideoPlayer extends Vue {
       },
     };
   }
+
+  created() {
+    window.addEventListener("keypress", (e) => {
+      if (e.key === "p") {
+        this.player.pause();
+      }
+
+      if (e.key === "b") {
+        const goback = this.player.currentTime() - 1.0;
+        this.player.currentTime(goback);
+      }
+    });
+  }
 }
 </script>
+<style scoped>
+.monochrome {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+</style>
