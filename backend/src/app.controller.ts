@@ -18,4 +18,9 @@ export class AppController {
   streamVideo(@Param('fileName') fileName: string, @Res() res: any) {
     this.appService.streamData(fileName, res);
   }
+
+  @Get('video/convert/:fileName')
+  convertVideo(@Param('fileName') fileName: string, @Res() res: any) {
+    this.appService.convertVideo(fileName, res);
+  }
 }
