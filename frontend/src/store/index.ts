@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { getModule } from "vuex-module-decorators";
-import MovieModule from "./modules/MovieModule";
+import VideoModule from "./modules/VideoModule";
 
 interface Store {
-  MovieModule: MovieModule;
+  VideoModule: VideoModule;
 }
 Vue.use(Vuex);
 
@@ -12,11 +12,11 @@ const store = new Vuex.Store<Store>({
   mutations: {},
   actions: {},
   modules: {
-    MovieModule,
+    VideoModule,
   },
 });
 
 export default store;
 
 // Vuex modules and store must be linked for actions to work properly.
-getModule(MovieModule, store);
+getModule(VideoModule, store);

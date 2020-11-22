@@ -1,19 +1,21 @@
 <template>
-  <v-container fluid class="d-flex justify-center align-center">
+  <v-container class="d-flex justify-center align-center" fill-height>
     <v-col cols="5" justify="center">
-      <SearchBar />
-      <MainTab />
+      <upload-file />
     </v-col>
+    <!-- <v-col cols="12" justify="center">
+      <video-player />
+    </v-col> -->
   </v-container>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import MainTab from "@/components/MainTab.vue";
-import SearchBar from "@/components/SearchBar.vue";
+import UploadFile from "@/components/UploadFile.vue";
+// import VideoPlayer from "@/components/VideoPlayer.vue";
 
 @Component({
-  components: { MainTab, SearchBar },
+  components: { UploadFile },
 })
 export default class HomeView extends Vue {}
 </script>
